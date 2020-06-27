@@ -1,0 +1,152 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nuke-build/nuke/master/source/Nuke.CodeGeneration/schema.json",
+  "references": [
+    "https://raw.githubusercontent.com/cli/cli/trunk/cmd/gh/main.go"
+  ],
+  "name": "GitHub",
+  "officialUrl": "https://cli.github.com/",
+  "help": "GitHub on the command line brings pull requests, issues, and other GitHub concepts to the terminal next to where you are already working with git and your code.",
+  "packageId": "gh",
+  "packageExecutable": "gh",
+  "tasks": [
+    {
+      "postfix": "2",
+      "preProcess": true,
+      "settingsClass": {
+        "properties": [
+          {
+            "name": "SolutionDirectory",
+            "type": "string",
+            "format": "{value}",
+            "help": "The directory containing the solution with the pdb files."
+          },
+          {
+            "name": "RepositoryUrl",
+            "type": "string",
+            "format": "-u {value}",
+            "help": "Url to remote git repository."
+          },
+          {
+            "name": "File",
+            "type": "string",
+            "format": "-f {value}",
+            "help": "Solution file name."
+          },
+          {
+            "name": "Configuration",
+            "type": "string",
+            "format": "-c {value}",
+            "help": "Name of the configuration, default value is 'Release'."
+          },
+          {
+            "name": "Platform",
+            "type": "string",
+            "format": "-p {value}",
+            "help": "Name of the platform, default value is 'AnyCPU'."
+          },
+          {
+            "name": "BranchName",
+            "type": "string",
+            "format": "-b {value}",
+            "help": "Name of the branch to use on the remote repository."
+          },
+          {
+            "name": "LogFile",
+            "type": "string",
+            "format": "-l {value}",
+            "help": "The log file to write to."
+          },
+          {
+            "name": "CommitSha",
+            "type": "string",
+            "format": "-s {value}",
+            "help": "The SHA-1 hash of the commit."
+          },
+          {
+            "name": "PdbDirectory",
+            "type": "string",
+            "format": "-d {value}",
+            "help": "The directory where pdb files exists, default value is the normal project output directory."
+          },
+          {
+            "name": "UsePowershell",
+            "type": "bool",
+            "format": "-powershell",
+            "help": "Use an indexing strategy that won't rely on SRCSRV http support, but use a powershell command for URL download instead."
+          },
+          {
+            "name": "ErrorsAsWarnings",
+            "type": "bool",
+            "format": "-errorsaswarnings",
+            "help": "Don't fail on errors, but treat them as warnings instead."
+          },
+          {
+            "name": "SkipVerification",
+            "type": "bool",
+            "format": "-skipverify",
+            "help": "Skip pdb verification in case it causes issues (it's a formality anyway)"
+          },
+          {
+            "name": "Debug",
+            "type": "bool",
+            "format": "-debug",
+            "help": "Enables debug mode with special dumps of msbuild."
+          }
+        ]
+      }
+    },
+    {
+      "postfix": "3",
+      "preProcess": true,
+      "settingsClass": {
+        "properties": [
+          {
+            "name": "PdbFile",
+            "type": "string",
+            "format": "{value}",
+            "help": "The PDB to add source indexing to."
+          },
+          {
+            "name": "Method",
+            "type": "GitLinkSourceCodeRetrieval",
+            "format": "--method {value}",
+            "help": "The method for SRCSRV to retrieve source code. One of &lt;Http|Powershell&gt;. Default is Http."
+          },
+          {
+            "name": "RepositoryUrl",
+            "type": "string",
+            "format": "--url {value}",
+            "help": "Url to remote git repository."
+          },
+          {
+            "name": "CommitSha",
+            "type": "string",
+            "format": "--commit {value}",
+            "help": "The git ref to assume all the source code belongs to."
+          },
+          {
+            "name": "BaseDirectory",
+            "type": "string",
+            "format": "--baseDir {value}",
+            "help": "The path to the root of the git repo."
+          },
+          {
+            "name": "SkipVerification",
+            "type": "bool",
+            "format": "--skipVerify",
+            "help": "Skip verification that all source files are available in source control."
+          }
+        ]
+      }
+    }
+  ],
+  "enumerations": [
+    {
+      "name": "GitLinkSourceCodeRetrieval",
+      "values": [
+        "Http",
+        "Powershell"
+      ]
+    }
+  ]
+}
